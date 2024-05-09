@@ -1,0 +1,10 @@
+venv/*
+venv/
+tmp/
+tmp/*
+MNIST/
+MNIST/*
+data/
+data/*
+.vscode/*
+
