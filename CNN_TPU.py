@@ -39,7 +39,7 @@ class MNISTClassifier(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=0.0000001)
+        return torch.optim.Adam(self.parameters(), lr=0.0001)
 
 def estimate_accuracy(model, test_loader):
     correct = 0
@@ -62,11 +62,11 @@ transform = transforms.Compose([
 
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=128, shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=False)
 
 # TPU 설정
-trainer = pl.Trainer(accelerator='tpu', devices=4, max_epochs=15)
+trainer = pl.Trainer(accelerator='tpu', devices=4, max_epochs=30)
 
 # 모델 학습
 model = MNISTClassifier()
